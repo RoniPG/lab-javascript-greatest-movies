@@ -94,18 +94,32 @@ function orderAlphabetically(moviesArray) {
     const onlyTitleArray = moviesArray.map((movie) => movie.title);
     onlyTitleArray.sort((titleA, titleB) => titleA.localeCompare(titleB));
     return onlyTitleArray.filter((movie, index) => index < 20);
-    
     /**  Another way todo the same: */
     // const onlyTitleArray = moviesArray.map((movie) => movie.title)
     // .sort((titleA, titleB) => titleA.localeCompare(titleB))
     // .filter((movie, index) => index < 20);
     // return onlyTitleArray;
-    
 }
-    
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+function turnHoursToMinutes(moviesArray) {
+    return moviesArray.reduce((movieTimeMinuts, movie) => {
+        // console.log(movie.duration.substring(3, movie.duration.indexOf("m")));
+        // console.log(i);
+        const hoursToMinutes = parseInt(movie.duration[0]) *60;
+        const minutes = (movie.duration.length > 3) ? parseInt(movie.duration.substring(3, movie.duration.indexOf("m"))) : 0;
+        const totalMinuts = hoursToMinutes + minutes;
+        // console.log(totalMinuts);
+        movieTimeMinuts.push({
+            ...movie,
+            duration : totalMinuts
+        })
+        // console.log(movieTimeMinuts);
+        return movieTimeMinuts;
+        // movieTimeMinuts.push(movie)
+        // console.log(movieTimeMinuts);
+    }, []);
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
